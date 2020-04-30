@@ -1,0 +1,35 @@
+version: "3"
+services:
+  php:
+    build:
+      context: ./bin/php/${PHP_VERSION}
+      args:
+        PHP_VERSION: ${PHP_VERSION}
+    container_name: ${PHP_VERSION}
+    restart: 'always'
+    cap_add:
+          - SYS_PTRACE
+    ports:
+      - "${PHP_PORT}:9000"
+    networks:
+      - ${NETWORK}
+    volumes:
+          - ${WWW}:/var/www/html/:rw
+          - ${PHP_FPM_CONF}:/usr/local/etc/php-fpm.d/www.conf:rw
+          - ${PHP_INI}:/usr/local/etc/php/php.ini:ro
+          - ${PHP_LOG}:/var/log/php
+  nginx:
+    image: nginx:${NGINX_VERSION}-alpine
+    container_name: nginx
+    restart: 'always'
+    networks:
+      - ${NETWORK}
+    volumes:
+      - ${WWW}:/var/www/html/:rw
+      - ${NGINX_CONFD}:/etc/nginx/conf.d/:rw
+      - ${NGINX_CONF}:/etc/nginx/nginx.conf:ro
+      - ${NGINX_LOG}:/var/log/nginx/:rw
+    ports:
+          - "${NGINX_HTTP_PORT}:80"
+          - "${NGINX_HTTPS_PORT}:443"
+
