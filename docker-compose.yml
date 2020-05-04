@@ -5,7 +5,10 @@ services:
       context: ./bin/php/${PHP_VERSION}
       args:
         PHP_VERSION: ${PHP_VERSION}
-    container_name: ${PHP_VERSION}
+        TZ: "$TZ"
+        ALPINE_REPOSITORIES: ${ALPINE_REPOSITORIES}
+        EXTENSIONS: ${EXTENSIONS}
+    container_name: ${PHP_CONTAINER_NAME}
     restart: 'always'
     cap_add:
           - SYS_PTRACE
@@ -18,9 +21,12 @@ services:
           - ${PHP_FPM_CONF}:/usr/local/etc/php-fpm.d/www.conf:rw
           - ${PHP_INI}:/usr/local/etc/php/php.ini:ro
           - ${PHP_LOG}:/var/log/php
+
   nginx:
     image: nginx:${NGINX_VERSION}-alpine
-    container_name: nginx
+    container_name: ${NGINX_CONTAINER_NAME}
+    environment:
+      TZ: "$TZ"
     restart: 'always'
     networks:
       - ${NETWORK}
@@ -32,4 +38,19 @@ services:
     ports:
           - "${NGINX_HTTP_PORT}:80"
           - "${NGINX_HTTPS_PORT}:443"
+
+  mysql:
+    image: mysql:${MYSQL_VERSION}
+    container_name: ${MYSQL_CONTAINER_NAME}
+    ports:
+      - "${MYSQL_PORT}:3306"
+    volumes:
+      - ${MYSQL_CONF}:/etc/mysql/conf.d/mysql.cnf:ro
+      - ${MYSQL_DATA}:/var/lib/mysql/:rw  #include mysql log
+    restart: 'always'
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      TZ: "$TZ"
+    networks:
+      - ${NETWORK}
 
