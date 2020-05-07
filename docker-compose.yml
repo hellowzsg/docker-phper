@@ -54,3 +54,38 @@ services:
     networks:
       - ${NETWORK}
 
+  redis:
+    image: redis:${REDIS_VERSION}
+    container_name: ${REDIS_CONTAINER_NAME}
+    ports:
+      - "${REDIS_PORT}:6379"
+    volumes:
+      - ${REDIS_CONF}:/etc/redis.conf:ro
+      - ${REDIS_DATA}:/data:rw
+      - ${REDIS_LOG}:/var/log/redis/:rw
+    restart: 'always'
+    entrypoint: ["redis-server", "/etc/redis.conf"]
+    environment:
+      TZ: "$TZ"
+    networks:
+      - ${NETWORK}
+
+  rabbit:
+    image: rabbitmq:management
+    container_name: ${RABBITMQ_CONTAINER_NAME}
+    privileged: true
+    ports:
+      - ${RABBITMQ_MANAGEMENT_PORT}:15672
+      - ${RABBITMQ_AMQP_PORT_1}:5672
+    environment:
+      RABBITMQ_DEFAULT_USER: "${RABBITMQ_DEFAULT_USER}"
+      RABBITMQ_DEFAULT_PASS: "${RABBITMQ_DEFAULT_PASS}"
+      TZ: "$TZ"
+    volumes:
+      - ${RABBITMQ_CONF}:/etc/rabbitmq:rw
+      - ${RABBITMQ_LOG}:/var/log/rabbitmq:rw
+      - ${RABBITMQ_DATA}:/var/lib/rabbitmq:rw
+    restart: 'always'
+    networks:
+      - ${NETWORK}
+
