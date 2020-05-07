@@ -1,0 +1,4 @@
+*.log
+/data/redis/*
+/data/mysql/*
+/data/rabbitmq/*
