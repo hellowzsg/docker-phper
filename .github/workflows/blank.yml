@@ -1,0 +1,21 @@
+name: Docker compose CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Deploy docker-compose
+        uses: hasnat/deploy-docker-compose@v0.1-alpha
+      - name: docker-compose up
+        run: docker-compose up -d
