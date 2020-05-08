@@ -30,4 +30,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
       - name: docker-compose up
-        run: docker-compose up -d
+        run: |
+          docker-compose up -d
+          docker-compose ps
