@@ -2,8 +2,22 @@ name: deploy
 
 on:
   push:
+    paths: 
+      - '.env'
+      - 'docker-compose.yml'
+      - 'bin/**'
+      - 'config/**'
+      - 'data/**'
+      - 'logs/**'
     branches: [ master ]
   pull_request:
+    paths: 
+      - '.env'
+      - 'docker-compose.yml'
+      - 'bin/**'
+      - 'config/**'
+      - 'data/**'
+      - 'logs/**'
     branches: [ master ]
 
 jobs:
