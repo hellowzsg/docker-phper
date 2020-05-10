@@ -33,3 +33,5 @@ jobs:
         run: |
           docker-compose up -d
           docker-compose ps
+      - name: tests
+        run: sudo sh ./.github/workflows/tests.sh

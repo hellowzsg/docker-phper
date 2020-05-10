@@ -46,7 +46,7 @@ services:
     ports:
       - "${MYSQL_PORT}:3306"
     volumes:
-      - ${MYSQL_CONF}:/etc/mysql/conf.d/mysql.cnf:ro
+      - ${MYSQL_CONF}:/etc/mysql/conf.d:rw
       - ${MYSQL_DATA}:/var/lib/mysql/:rw  #include mysql log
     restart: 'always'
     environment:
