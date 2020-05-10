@@ -37,7 +37,7 @@ try {
     }
 
     $conn->exec("drop database $dbname");
-    echo date('Y-m-d H:i:s') . " myqsl-all-success" . "<br/>" . PHP_EOL;
+    echo date('Y-m-d H:i:s') . " mysql-all-success" . "<br/>" . PHP_EOL;
 } catch(PDOException $e) {
     echo $e->getMessage() . PHP_EOL;
 }

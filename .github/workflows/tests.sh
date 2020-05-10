@@ -6,6 +6,6 @@ curl -fs --resolve localhost.docker:80:127.0.0.1 "http://localhost.docker/dp/ind
 
 curl -fs --resolve localhost.docker:80:127.0.0.1 "http://localhost.docker/dp/redis.php" | grep "redis-all-success" || exit 1
 
-curl -fs --resolve localhost.docker:80:127.0.0.1 "http://localhost.docker/dp/mysql.php" | grep "mysql-all-success" || echo "mysql warning"
-
+#mysql test TODO
+curl -fs --resolve localhost.docker:80:127.0.0.1 "http://localhost.docker/dp/mysql.php" | grep "mysql-all-success" || (echo "mysql warning" && curl -fs --resolve localhost.docker:80:127.0.0.1 "http://localhost.docker/dp/mysql.php")
 exit 0
