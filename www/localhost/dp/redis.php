@@ -12,7 +12,7 @@ try {
     echo "Stored string in redis:: " . $redis->get($key) . '<br>' .PHP_EOL;
     $redis->delete($key);
     echo "delete key in redis:: $key".'<br>'.PHP_EOL;
-    echo "redis-all-success" . "<br />" . PHP_EOL;
+    echo "redis-all-success" . PHP_EOL;
 } catch(PDOException $e) {
     echo $e->getMessage() . PHP_EOL;
 }
