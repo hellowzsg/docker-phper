@@ -89,6 +89,6 @@ docker 一键部署php开发者环境
    sh ./.github/workflows/tests.sh
    ```
 
-   ![test-success][doc/test.png]
+   ![test-success](doc/test.png)
 
 4. star...
