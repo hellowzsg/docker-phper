@@ -47,7 +47,7 @@ docker 一键部署php开发者环境
 
 ### 开发流程
 
-* [x] php7.1
+* [x] php7.2
 * [x] mysql
 * [x] nginx
 * [x] redis
@@ -92,3 +92,7 @@ docker 一键部署php开发者环境
    ![test-success](doc/test.png)
 
 4. star...
+
+#### 额外的PHP扩展
+
+> todo
