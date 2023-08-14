@@ -1,4 +1,7 @@
 *.log
+.env
 /data/redis/*
 /data/mysql/*
 /data/rabbitmq/*
+!www/localhost/*
+www/*
