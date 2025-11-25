@@ -1,0 +1,24 @@
+server {
+        listen       80;
+        server_name  fa.docker.local;
+        root   /var/www/html/fa/public;
+        location / {
+            index  index.html index.htm index.php;
+            #主要是这一段一定要确保存在
+            if (!-e $request_filename) {
+                rewrite  ^(.*)$  /index.php?s=/$1  last;
+                break;
+            }
+            #结束
+            #autoindex  on;
+        }
+        location ~ \.php(.*)$ {
+            fastcgi_pass    dp_php:9000;
+            fastcgi_index  index.php;
+            fastcgi_split_path_info  ^((?U).+\.php)(/?.+)$;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            fastcgi_param  PATH_INFO  $fastcgi_path_info;
+            fastcgi_param  PATH_TRANSLATED  $document_root$fastcgi_path_info;
+            include        fastcgi_params;
+        }
+}
