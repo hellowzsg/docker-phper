@@ -2,7 +2,7 @@ version: "3"
 services:
   php:
     build:
-      context: ./bin/php/${PHP_VERSION}
+      context: ./dockerfiles/php/${PHP_VERSION}
       args:
         PHP_VERSION: ${PHP_VERSION}
         TZ: "$TZ"

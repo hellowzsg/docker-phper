@@ -81,7 +81,7 @@ docker 一键部署php开发者环境
 
    > 这里只启用 php,mysql,nginx,mysql,redis
    >
-   > 家庭宽带在构建php镜像的时候可能会有网络问题，可以试试手机热点
+   > 家庭宽带在构建php镜像的时候可能会有网络问题，可能需要代理
 
 3. 测试
 
@@ -93,6 +93,6 @@ docker 一键部署php开发者环境
 
 4. star...
 
-#### 额外的PHP扩展
+### PHP扩展
 
-> todo
+参考https://github.com/mlocati/docker-php-extension-installer?tab=readme-ov-file#supported-php-extensions
